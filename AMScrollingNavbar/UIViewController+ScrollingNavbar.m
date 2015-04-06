@@ -370,8 +370,8 @@
         }
         
         self.delayDistance += delta;
-        
-        if (self.delayDistance > 0 && self.maxDelay < [self scrollView].contentOffset.y) {
+
+        if (self.delayDistance > 0 && [self scrollView].contentOffset.y > 0) {
             return;
         }
         
@@ -404,6 +404,7 @@
 
 - (void)restoreContentoffset:(float)delta
 {
+
     // Hold the scroll steady until the navbar appears/disappears
     CGPoint offset = [[self scrollView] contentOffset];
     
@@ -411,9 +412,9 @@
         [[self scrollView] setContentOffset:(CGPoint){offset.x, offset.y - delta}];
     } else {
         if (delta > 0) {
-            [[self scrollView] setContentOffset:(CGPoint){offset.x, offset.y - delta - 1}];
+            [[self scrollView] setContentOffset:(CGPoint){offset.x, offset.y - delta}];
         } else {
-            [[self scrollView] setContentOffset:(CGPoint){offset.x, offset.y - delta + 1}];
+            [[self scrollView] setContentOffset:(CGPoint){offset.x, offset.y - delta}];
         }
     }
 }
